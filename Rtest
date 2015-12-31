@@ -1,0 +1,164 @@
+#read.table批量读取txt
+fileName <- dir("E:/hylanda/20151116/2/邢伟永/邢伟永")
+dataList <- vector("list",length(fileName))
+for(i in 1:length(dataList)){
+  data<-read.table(paste("E:/hylanda/20151116/2/邢伟永/邢伟永",fileName[i],sep = "/"),
+                   header =F,encoding = 'UTF-8',fill = T,blank.lines.skip = T)
+  dataList[[i]]<-list(fileName=fileName[i],data=data)
+}
+#列表合并
+data1<-vector()
+for(i in 1:length(dataList)){
+  data1<-rbind(dataList[[i]]$data,data1)
+}
+write.table(data1$V1,"abc.txt")
+#read.lines批量读取txt
+get.msg<-function(path){
+  con<-file(path,open = "rt")
+  msg<-readLines(con)
+  n<-grep("各位代表",msg)
+ msg<-msg[seq(n[1],length(msg),1)]
+ close(con)
+ return(paste(msg,collapse = ""))
+}
+path="E:/资料/docs"
+docs<-dir(path)
+docs<-docs[which(docs!="cmds")]
+msg<-sapply(docs,function(p) get.msg(paste(path,p,sep="/")))
+msg<-as.data.frame(cbind(names(msg),unlist(msg)),stringAsFactor=F)
+colnames(msg)<-c("id","sentence")
+#rownames(msg)<-null
+
+#随机抽取txt
+urldata<-read.table("",header = F)
+selecturl<-dpt$V1[sample(length(dpt$V1)/2,130)]
+
+write.csv(selecturl,file="./dpt.csv")
+#读取xlx
+require(RODBC)
+odbcConnectExcel()
+sqlFetch()
+library(rJava)
+library(xlsx)
+read.xlsx("论坛数据检查(1).xlsx",sheetanme="sheet1")
+#读取csv
+ab<-read.csv("./ab.csv",header = F)
+
+
+#安装Rjava
+install.packages("rJava")
+install.packages("xlsx")
+library(rJava)
+library(xlsx)
+
+
+
+
+
+
+if(!suppressWarnings(require("plyr"))){
+  install.packages("plyr")
+  require("plyr")
+}
+
+a<-read.table("clipboard",header = F)
+lever_now<-a$V1[sample(length(a$V1),100)]
+write.table(lever_now,"career_loc1.txt")
+
+n<-sample(length(a$url),100)
+sel_wdpt<-data.frame(a$url[n],a$阅读数[n],a$回复数[n])
+sel_temp<-cbind(sel_wdpt,a$阅读数[n]>a$回复数[n])
+write.table(sel_temp,"sel_wdpt1.txt")
+
+
+a<-read.table("clipboard",header = T)
+b<-read.table("clipboard",header = T)
+c<-read.table("clipboard",header = T)
+for(i in length(a$V1)){
+  ifelse(any(a$V1[i]==b$V1),a$V2[i]<-"1",a$V2[i]<-"0")
+}
+
+e<-merge(a,d,by.x ="a",by.y = "b",all.x = T)
+unique()#去重函数可直接应用于数据框
+
+a<-read.table("clipboard")
+n<-sample(length(a$profile_url),50)
+b<-a$profile_url[n]
+write.table(b,"select_q.txt")
+
+#向量重复个数汇总得到table，并转化为data.frame
+d<-as.data.frame(table(unlist(a)))
+n<-sample(length(d$Var1),200)
+write.table(data.frame(d$Var1[n],d$Freq[n]),"select_q.txt")
+
+n<-which(d$Freq>200)
+m<-sample(n,10)
+
+#拼接URL
+a<-read.table("clipboard")
+a<-as.matrix(a)
+temp=""
+for(i in 1:length(a[,1])){
+  for(j in 1:length(a[1,])){
+    temp<-rbind(temp,a[i,j])
+  }
+}
+write.table(temp,"sum.txt")
+
+a<-read.table("clipboard")
+a<-as.vector(a$V1)
+b<-read.table("clipboard")
+b<-as.vector(b$V1)
+temp=""
+for(i in 1:length(a)){
+  for(j in 1:length(b)){
+    temp<-rbind(temp,gsub("aaaaa",a[i],b[j]))
+  }
+}
+write.table(temp,"final.txt")
+
+
+library(plyr)
+for(j in 1:length(b)){
+  aaply(a,.margin=1,function(x){
+    temp<-rbind(temp,gsub("a",x,b[j]))
+  })
+}
+
+
+
+result<-T
+content<-list()
+a<-read.table("clipboard")
+for(i in 1:length(a$V1)){
+  content[[i]]<-readLines("http://news.so.com/ns?rank=pdate&q=site:(sxredcross.org.cn)",
+                     encoding ="UTF-8")
+  for(j in 1:length(content[[i]])){
+    if(content[[i]][j]%in%"<strong>建议您：</strong>")result[i]<-F
+    else result[i]<-T
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
