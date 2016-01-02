@@ -138,7 +138,24 @@ for(i in 1:length(a$V1)){
     else result[i]<-T
   }
 }
-
+#between()获取小写字母个数，charToRaw()获取字符ASCII码
+library(data.table)
+sum(between(charToRaw("98sknnshb0ki987s"),charToRaw("a"),charToRaw("z")))
+#调用网络版金山词霸
+ciba<-function(x){
+  link<-url(paste("http://dict.youdao.com/m/search?keyfrom=dict.mindex&vendor=&q=",iconv(x,to='UTF-8')),encoding = 'UTF-8')
+  a<-readLines(link)
+  a<-gsub('(<[^<>]*>)|(^ )|(\t)','',a)
+  a<-gsub(' {2,}','',a)
+  a<-head(a,-11)
+  a<-tail(a,-35)
+  a<-a[a!='']
+  a<-paste(a,collapse='\n')
+  a<-gsub('(\n *){2,}','\n',a)
+  a<-gsub(' *\n *','\n',a)
+  cat(a)
+}
+ciba('中国')
 
 
 
