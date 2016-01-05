@@ -157,7 +157,22 @@ ciba<-function(x){
 }
 ciba('中国')
 
-
+#lapply(X, FUN, ...)和sapply(X, FUN,..., simplify = TRUE, USE.NAMES = TRUE)
+x<-list(a=1:10,beta=exp(-3:3),locic=c(TRUE,FALSE,FALSE,TRUE))
+lapply(x,quantile)
+sapply(x,quantile,simplify = T)#simplify=T结果返回矩阵形式
+#r启动是自动载入.r文件，在etc/Rprofile.site中加入如下代码
+setwd("d:/我的文档/documents")
+myfun<-lapply(list.files(path = "d:/我的文档/documents",,pattern='\\.r$'),source)
+#intersect()求交集,可以实现求n列中相同的元素/%in%
+a<-1:100
+b<-7:78
+c<-30:200
+intersect(intersect(a,b),c)
+a%in%b
+a[a%in%b]
+a[a%in%b]%in%c
+a[a%in%b][a[a%in%b]%in%c]#效果一样求n列相同元素
 
 
 
